@@ -1,10 +1,25 @@
-function getElementWidth(content, padding, border) {
-  const totalWidth =
-    Number.parseFloat(content) +
-    Number.parseFloat(padding) * 2 +
-    Number.parseFloat(border) * 2;
-  return totalWidth;
+const userInput = document.querySelector('#name-input');
+const userTitle = document.querySelector('#name-output');
+
+userInput.classList.add('user-input');
+userTitle.classList.add('user-title');
+
+// function swapLetters(event) {
+//   userTitle.textContent = event.currentTarget.value;
+
+//   if (event.currentTarget.value === '') {
+//     userTitle.textContent = 'Anonymous';
+//   }
+// }
+
+function swapLetters(event) {
+  const trimmedValue = event.currentTarget.value.trim();
+
+  if (trimmedValue === '') {
+    userTitle.textContent = 'Anonymous';
+  } else {
+    userTitle.textContent = trimmedValue;
+  }
 }
-console.log(getElementWidth('50px', '8px', '4px')); // 74
-console.log(getElementWidth('60px', '12px', '8.5px')); // 101
-console.log(getElementWidth('200px', '0px', '0px')); // 200
+
+userInput.addEventListener('input', swapLetters);
