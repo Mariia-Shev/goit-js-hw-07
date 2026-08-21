@@ -24,30 +24,66 @@ const images = [
     alt: 'Lighthouse Coast Sea',
   },
 ];
+
 const galleryList = document.querySelector('.gallery');
+const fragment = document.createDocumentFragment();
 
-// galleryList.style.listStyleType = 'none';
-// galleryList.style.margin = '100px 156px';
-// galleryList.style.padding = '0';
-// galleryList.style.display = 'flex';
-// galleryList.style.flexDirection = 'row';
-// galleryList.style.flexWrap = 'wrap';
-// galleryList.style.columnGap = '24px';
-// galleryList.style.rowGap = '48px';
-
-images.forEach(img => {
+images.forEach(({ url, alt }) => {
   const galleryItem = document.createElement('li');
   const galleryImage = document.createElement('img');
 
   galleryImage.classList.add('gallery-image');
-  galleryImage.setAttribute('src', img.url);
-  galleryImage.setAttribute('alt', img.alt);
-  galleryImage.setAttribute('width', '360px');
-  galleryImage.setAttribute('height', '300px');
+  galleryImage.src = url;
+  galleryImage.alt = alt;
+  galleryImage.width = 360; // unitless — these are the width/height IDL attrs
+  galleryImage.height = 300;
 
   galleryItem.classList.add('gallery-item');
-
-  galleryItem.append(galleryImage);
-  galleryList.append(galleryItem);
+  galleryItem.appendChild(galleryImage); // <- was missing
+  fragment.appendChild(galleryItem); // <- build off-DOM
 });
+
+galleryList.appendChild(fragment); // <- single insert, once
 console.log(galleryList);
+
+// const images = [
+//   {
+//     url: 'https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?dpr=2&h=750&w=1260',
+//     alt: 'White and Black Long Fur Cat',
+//   },
+//   {
+//     url: 'https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?dpr=2&h=750&w=1260',
+//     alt: 'Orange and White Koi Fish Near Yellow Koi Fish',
+//   },
+//   {
+//     url: 'https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?dpr=2&h=750&w=1260',
+//     alt: 'Group of Horses Running',
+//   },
+//   {
+//     url: 'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg',
+//     alt: 'Alpine Spring Meadows',
+//   },
+//   {
+//     url: 'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg',
+//     alt: 'Nature Landscape',
+//   },
+//   {
+//     url: 'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
+//     alt: 'Lighthouse Coast Sea',
+//   },
+// ];
+// const galleryList = document.querySelector('.gallery');
+
+// images.forEach(img => {
+//   const galleryItem = document.createElement('li');
+//   const galleryImage = document.createElement('img');
+
+//   galleryImage.classList.add('gallery-image');
+//   galleryImage.setAttribute('src', img.url);
+//   galleryImage.setAttribute('alt', img.alt);
+//   galleryImage.setAttribute('width', '360px');
+//   galleryImage.setAttribute('height', '300px');
+
+//   galleryItem.classList.add('gallery-item');
+// });
+// console.log(galleryList);
